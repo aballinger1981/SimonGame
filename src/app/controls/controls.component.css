@@ -1,0 +1,7 @@
+#controls {
+  height: 300px;
+  width: 300px;
+  border: 20px solid black;
+  border-radius: 300px;
+  background-color: lightgrey;
+}

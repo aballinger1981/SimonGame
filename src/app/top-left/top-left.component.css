@@ -1,0 +1,9 @@
+#top-left {
+  height: 300px;
+  width: 300px;
+  border: 30px solid black;
+  border-right: 15px solid black;
+  border-bottom: 15px solid black;
+  border-top-left-radius: 350px;
+  background-color: #0FB81D;
+}

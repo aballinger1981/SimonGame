@@ -1,0 +1,29 @@
+#game-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 0;
+}
+
+#top {
+  display: flex;
+  flex-direction: row;
+}
+
+#bottom {
+  display: flex;
+  flex-direction: row;
+}
+
+#controls-wrapper {
+  position: absolute;
+  top: 175px;
+  left: 175px;
+  z-index: 1;
+}
