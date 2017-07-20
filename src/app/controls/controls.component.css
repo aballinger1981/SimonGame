@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|Roboto|VT323');
 
 #controls {
   display: flex;
@@ -8,7 +8,7 @@
   width: 300px;
   border: 20px solid black;
   border-radius: 300px;
-  background-color: lightgrey;
+  background-color: #e6e6e6;
 }
 
 img {
@@ -28,10 +28,12 @@ img {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 65%;
+  width: 75%;
+  margin-top: -20px;
 }
 
 #count {
+  font-family: 'VT323', monospace;
   height: 60px;
   width: 85px;
   background-color: black;
@@ -41,7 +43,7 @@ img {
   text-align: center;
   line-height: 60px;
   letter-spacing: 2px;
-  font-size: 2.5em;
+  font-size: 3.5em;
 }
 
 #screen {
@@ -55,7 +57,14 @@ img {
   opacity: .2;
 }
 
-#start {
+#start, #strict {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#start-button {
   height: 40px;
   width: 40px;
   border-radius: 40px;
@@ -63,7 +72,12 @@ img {
   background-color: red;
 }
 
-#strict {
+#start span, #strict span {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 5px;
+}
+
+#strict-button {
   height: 40px;
   width: 40px;
   border-radius: 40px;
@@ -75,11 +89,26 @@ img {
   outline: none;
 }
 
+#on-off {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 25px;
+}
+
+#off {
+  margin-right: 5px;
+}
+
+#on {
+  margin-left: 5px;
+}
+
 #inner {
   height: 25px;
   width: 75px;
   background-color: black;
-  margin-top: 25px;
   position: relative;
 }
 
