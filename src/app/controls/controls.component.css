@@ -134,13 +134,13 @@ img {
 
 #off {
   position: absolute;
-  left: 100px;
+  left: 101px;
   top: 268px;
 }
 
 #on {
   position: absolute;
-  left: 209px;
+  left: 210px;
   top: 268px;
 }
 
@@ -149,7 +149,7 @@ img {
   width: 75px;
   background-color: black;
   position: absolute;
-  left: 132px;
+  left: 133px;
   top: 266px;
 }
 
