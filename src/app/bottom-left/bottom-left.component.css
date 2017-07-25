@@ -8,6 +8,10 @@
   background-color: #05B5FF;
 }
 
+#bottom-left:hover {
+  cursor: pointer;
+}
+
 #bottom-left:active {
   box-shadow: inset 3px 10px 100px #00a1e6;
   background: linear-gradient(to left, #05B5FF, #4dc9ff, #4dc9ff, #05B5FF);

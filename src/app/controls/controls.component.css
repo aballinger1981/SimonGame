@@ -116,6 +116,10 @@ img {
   position: absolute;
 }
 
+#start-button:hover, #strict-button:hover {
+  cursor: pointer;
+}
+
 #start-button:focus, #strict-button:focus {
   outline: none;
 }

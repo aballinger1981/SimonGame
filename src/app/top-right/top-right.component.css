@@ -8,6 +8,10 @@
   background-color: #FF3F30;
 }
 
+#top-right:hover {
+  cursor: pointer;
+}
+
 #top-right:active {
   box-shadow: inset 3px 10px 100px #ff291a;
   background: linear-gradient(to left, #FF3F30, #ff584d, #ff584d, #FF3F30);
