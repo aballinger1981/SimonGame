@@ -9,6 +9,7 @@ import { GamePlayService } from '../game-play.service';
 export class ControlsComponent implements OnInit {
   public onOffState: boolean = false;
   public clickableClassToggle: string = 'unclickable';
+  public strictMode: boolean = false;
 
   constructor(
     public gamePlay: GamePlayService
@@ -28,6 +29,10 @@ export class ControlsComponent implements OnInit {
     } else {
       this.clickableClassToggle = 'unclickable';
     }
+  }
+
+  public setStrictMode(): void {
+    this.strictMode === true ? this.strictMode = false : this.strictMode = true;
   }
 
 }
