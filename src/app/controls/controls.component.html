@@ -4,7 +4,7 @@
     <span id="simon">simon</span>
   </div>
   <div id="display-and-buttons">
-    <div id="start">
+    <div id="start" [className]="clickableClassToggle">
       <button id="start-button">
       </button>
       <span>START</span>
@@ -13,7 +13,7 @@
       <div id="screen">
       </div>
     </div>
-    <div id="strict">
+    <div id="strict" [className]="clickableClassToggle">
       <div id="strict-light-background">
         <div id="strict-light-foreground">
         </div>
@@ -27,7 +27,7 @@
     <span id="off">OFF</span>
     <label id="switch">
       <input type="checkbox">
-      <span id="slider" (click)="gamePlay.setOnOffState()"></span>
+      <span id="slider" (click)="setOnOffState()"></span>
     </label>
     <span id="on">ON</span>
   </div>

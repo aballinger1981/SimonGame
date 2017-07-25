@@ -6,8 +6,6 @@ export class GamePlayService {
 
   constructor() { }
 
-  public setOnOffState(): void {
-    this.onOffState === true ? this.onOffState = false : this.onOffState = true;
-  }
+  
 
 }

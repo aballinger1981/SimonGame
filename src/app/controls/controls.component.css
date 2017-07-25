@@ -65,6 +65,14 @@ img {
   position: relative;
 }
 
+.unclickable {
+  pointer-events: none;
+}
+
+.clickable {
+  pointer-events: auto;
+}
+
 #start-button {
   height: 40px;
   width: 40px;

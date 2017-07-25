@@ -7,12 +7,27 @@ import { GamePlayService } from '../game-play.service';
   styleUrls: ['./controls.component.css']
 })
 export class ControlsComponent implements OnInit {
+  public onOffState: boolean = false;
+  public clickableClassToggle: string = 'unclickable';
 
   constructor(
     public gamePlay: GamePlayService
   ) { }
 
   ngOnInit() {
+  }
+
+  public setOnOffState(): void {
+    this.onOffState === true ? this.onOffState = false : this.onOffState = true;
+    this.setClickabilityForStartAndStrictButtons();
+  }
+
+  public setClickabilityForStartAndStrictButtons(): void {
+    if (this.onOffState === true) {
+      this.clickableClassToggle = 'clickable';
+    } else {
+      this.clickableClassToggle = 'unclickable';
+    }
   }
 
 }
