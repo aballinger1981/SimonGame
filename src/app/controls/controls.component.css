@@ -7,7 +7,7 @@
   height: 300px;
   width: 300px;
   border: 20px solid black;
-  border-radius: 300px;
+  border-radius: 100%;
   background-color: #e6e6e6;
 }
 
@@ -37,7 +37,6 @@ img {
   width: 85px;
   background-color: black;
   border-radius: 10px;
-  position: relative;
   color: red;
   text-align: center;
   line-height: 60px;

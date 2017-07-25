@@ -4,7 +4,7 @@
   border: 30px solid black;
   border-right: 15px solid black;
   border-top: 15px solid black;
-  border-bottom-left-radius: 350px;
+  border-bottom-left-radius: 100%;
   background-color: #05B5FF;
 }
 

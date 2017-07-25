@@ -2,13 +2,13 @@
   position: relative;
   height: 100%;
   width: 100%;
+  user-select: none;
 }
 
 #button-container {
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 0;
 }
 
 #top {
@@ -25,5 +25,4 @@
   position: absolute;
   top: 175px;
   left: 175px;
-  z-index: 1;
 }
