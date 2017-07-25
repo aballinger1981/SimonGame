@@ -9,6 +9,7 @@ import { GamePlayService } from '../game-play.service';
 export class ControlsComponent implements OnInit {
   public onOffState: boolean = false;
   public clickableClassToggle: string = 'unclickable';
+  public strictLightToggle: string = 'strict-light-foreground-black';
   public strictMode: boolean = false;
 
   constructor(
@@ -19,7 +20,12 @@ export class ControlsComponent implements OnInit {
   }
 
   public setOnOffState(): void {
-    this.onOffState === true ? this.onOffState = false : this.onOffState = true;
+    if (this.onOffState === true) {
+      this.onOffState = false;
+      this.strictLightToggle = 'strict-light-foreground-black';
+    } else {
+      this.onOffState = true;
+    }
     this.setClickabilityForStartAndStrictButtons();
   }
 
@@ -33,6 +39,15 @@ export class ControlsComponent implements OnInit {
 
   public setStrictMode(): void {
     this.strictMode === true ? this.strictMode = false : this.strictMode = true;
+    this.setStrictLight();
+  }
+
+  public setStrictLight(): void {
+    if (this.strictLightToggle === 'strict-light-foreground-black') {
+      this.strictLightToggle = 'strict-light-foreground-red';
+    } else {
+      this.strictLightToggle = 'strict-light-foreground-black';
+    }
   }
 
 }
