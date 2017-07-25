@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GamePlayService } from '../game-play.service';
 
 @Component({
   selector: 'app-bottom-left',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomLeftComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public gamePlay: GamePlayService
+  ) { }
 
   ngOnInit() {
   }
