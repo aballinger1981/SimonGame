@@ -7,3 +7,8 @@
   border-bottom-right-radius: 350px;
   background-color: #FFFF01;
 }
+
+#bottom-right:active {
+  box-shadow: inset 3px 10px 100px #e6e600;
+  background: linear-gradient(to left, #ffff01, #ffff4d, #ffff4d, #ffff01);
+}
