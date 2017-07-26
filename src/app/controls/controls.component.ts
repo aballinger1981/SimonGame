@@ -7,7 +7,6 @@ import { GamePlayService } from '../game-play.service';
   styleUrls: ['./controls.component.css']
 })
 export class ControlsComponent implements OnInit {
-  public onOffState: boolean = false;
   public clickableClassToggle: string = 'unclickable';
   public strictLightToggle: string = 'strict-light-foreground-black';
   public strictMode: boolean = false;
@@ -20,17 +19,17 @@ export class ControlsComponent implements OnInit {
   }
 
   public setOnOffState(): void {
-    if (this.onOffState === true) {
-      this.onOffState = false;
+    if (this.gamePlay.onOffState === true) {
+      this.gamePlay.onOffState = false;
       this.strictLightToggle = 'strict-light-foreground-black';
     } else {
-      this.onOffState = true;
+      this.gamePlay.onOffState = true;
     }
     this.setClickabilityForStartAndStrictButtons();
   }
 
   public setClickabilityForStartAndStrictButtons(): void {
-    if (this.onOffState === true) {
+    if (this.gamePlay.onOffState === true) {
       this.clickableClassToggle = 'clickable';
     } else {
       this.clickableClassToggle = 'unclickable';

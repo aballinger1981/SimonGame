@@ -8,6 +8,14 @@
   background-color: #0FB81D;
 }
 
+.clickable {
+  pointer-events: auto;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+
 #top-left:hover {
   cursor: pointer;
 }
