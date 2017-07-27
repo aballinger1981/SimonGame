@@ -21,9 +21,7 @@ export class ControlsComponent implements OnInit {
 
   public setOnOffState(): void {
     if (this.onOffState === true) {
-      this.onOffState = false;
-      this.strictLightToggle = 'strict-light-foreground-black';
-      this.gamePlay.startButtonState = false;
+      this.resetGame();
     } else {
       this.onOffState = true;
     }
@@ -56,6 +54,16 @@ export class ControlsComponent implements OnInit {
       this.gamePlay.computerColorSelect(this.strictMode);
       this.clickableClassToggle = 'unclickable';
     }
+  }
+
+  public resetGame(): void {
+    this.onOffState = false;
+    this.gamePlay.computerColorPressMap.clear();
+    this.gamePlay.numberOfCorrectTurns = '';
+    this.gamePlay.playerColorPressNumber = 0;
+    this.gamePlay.computerColorPressNumber = 0;
+    this.strictLightToggle = 'strict-light-foreground-black';
+    this.gamePlay.colorButtonsClickableClass = 'unclickable';
   }
 
 }
