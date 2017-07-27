@@ -8,6 +8,7 @@ import { GamePlayService } from '../game-play.service';
 })
 export class TopLeftComponent implements OnInit {
   @ViewChild('color') color: ElementRef;
+  public colorButtonsClickable: boolean = false;
 
   constructor(
     public gamePlay: GamePlayService,

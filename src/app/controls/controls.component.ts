@@ -63,7 +63,7 @@ export class ControlsComponent implements OnInit {
     this.gamePlay.playerColorPressNumber = 0;
     this.gamePlay.computerColorPressNumber = 0;
     this.strictLightToggle = 'strict-light-foreground-black';
-    this.gamePlay.colorButtonsClickableClass = 'unclickable';
+    this.gamePlay.colorButtonsClickable = false;
   }
 
 }

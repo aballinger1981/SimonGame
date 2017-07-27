@@ -8,7 +8,7 @@ export class GamePlayService {
   public computerColorPressNumber: number = 0;
   public computerColorPressMap: Map<number, string> = new Map();
   public colorOptions: Array<string> = ['green', 'red', 'blue', 'yellow'];
-  public colorButtonsClickableClass: string = 'unclickable';
+  public colorButtonsClickable: boolean = false;
   public colorSelectedSource: Subject<string> = new Subject<string>();
   public colorSelected$: Observable<string> = this.colorSelectedSource.asObservable();
   public numberOfCorrectTurns: string = '';
@@ -21,7 +21,7 @@ export class GamePlayService {
   }
 
   public computerColorSelect(strictMode?: boolean): void {
-    this.colorButtonsClickableClass = 'unclickable';
+    this.colorButtonsClickable = false;
 
     if (this.numberOfCorrectTurns !== '!!') {
       this.computerColorPressNumber++;
@@ -32,13 +32,18 @@ export class GamePlayService {
     if (this.numberOfCorrectTurns === '!!' || this.numberOfCorrectTurns === '') {
       this.setDisplayCounter();
     }
+    this.playAllColorsInMap();
+  }
 
+  public playAllColorsInMap(): void {
     this.computerColorPressMap.forEach((pressedColor, key) => {
       setTimeout(() => {
         this.colorSelectedSource.next(pressedColor);
       }, 1000 * key);
     });
-    this.colorButtonsClickableClass = 'clickable';
+    setTimeout(() => {
+      this.colorButtonsClickable = true;
+    }, 1000 * this.computerColorPressMap.size + 500);
   }
 
   public checkColorPress(playerColor: string, soundNumber: string): void {
@@ -48,6 +53,7 @@ export class GamePlayService {
     audio.play();
     const computerColor = this.computerColorPressMap.get(this.playerColorPressNumber);
     if (computerColor !== playerColor) {
+      this.colorButtonsClickable = false;
       this.numberOfCorrectTurnsBeforeMistake = this.numberOfCorrectTurns;
       this.numberOfCorrectTurns = '!!';
       this.playerColorPressNumber = 0;
@@ -58,6 +64,7 @@ export class GamePlayService {
     }
 
     if (this.playerColorPressNumber === this.computerColorPressMap.size) {
+      this.colorButtonsClickable = false;
       this.playerColorPressNumber = 0;
       if (this.numberOfCorrectTurns !== '!!') {
         this.setDisplayCounter();
