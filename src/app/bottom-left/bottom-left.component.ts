@@ -16,7 +16,8 @@ export class BottomLeftComponent implements OnInit {
       if (colorSelected === 'blue') {
         this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', '0');
         this.renderer.invokeElementMethod(this.color.nativeElement, 'focus', []);
-
+        const audio = new Audio('../../assets/sounds/simonSound3.mp3');
+        audio.play();
         setTimeout(() => {
           this.renderer.invokeElementMethod(this.color.nativeElement, 'blur', []);
           this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', null);

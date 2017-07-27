@@ -16,7 +16,8 @@ export class TopLeftComponent implements OnInit {
       if (colorSelected === 'green') {
         this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', '0');
         this.renderer.invokeElementMethod(this.color.nativeElement, 'focus', []);
-
+        const audio = new Audio('../../assets/sounds/simonSound1.mp3');
+        audio.play();
         setTimeout(() => {
           this.renderer.invokeElementMethod(this.color.nativeElement, 'blur', []);
           this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', null);
