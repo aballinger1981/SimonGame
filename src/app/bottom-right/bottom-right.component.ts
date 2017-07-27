@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { GamePlayService } from '../game-play.service';
 
 @Component({
@@ -7,10 +7,23 @@ import { GamePlayService } from '../game-play.service';
   styleUrls: ['./bottom-right.component.css']
 })
 export class BottomRightComponent implements OnInit {
+  @ViewChild('color') color: ElementRef;
 
   constructor(
-    public gamePlay: GamePlayService
-  ) { }
+    public gamePlay: GamePlayService,
+    public renderer: Renderer) {
+    gamePlay.colorSelected$.subscribe(colorSelected => {
+      if (colorSelected === 'yellow') {
+        this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', '0');
+        this.renderer.invokeElementMethod(this.color.nativeElement, 'focus', []);
+
+        setTimeout(() => {
+          this.renderer.invokeElementMethod(this.color.nativeElement, 'blur', []);
+          this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', null);
+        }, 500);
+      }
+    });
+  }
 
   ngOnInit() {
   }

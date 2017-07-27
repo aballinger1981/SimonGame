@@ -23,6 +23,7 @@ export class ControlsComponent implements OnInit {
     if (this.onOffState === true) {
       this.onOffState = false;
       this.strictLightToggle = 'strict-light-foreground-black';
+      this.gamePlay.startButtonState = false;
     } else {
       this.onOffState = true;
     }
@@ -54,7 +55,6 @@ export class ControlsComponent implements OnInit {
     if (this.onOffState === true) {
       this.gamePlay.computerColorSelect(this.strictMode);
       this.clickableClassToggle = 'unclickable';
-      this.strictLightToggle = 'strict-light-foreground-black';
     }
   }
 

@@ -1,4 +1,4 @@
-<div id="top-right" [ngClass]="{'clickable': this.gamePlay.startButtonState,
+<div id="top-right" #color [ngClass]="{'clickable': this.gamePlay.startButtonState,
 'unclickable': !this.gamePlay.startButtonState}"
 (click)="this.gamePlay.checkColorPress('red')">
 </div>
