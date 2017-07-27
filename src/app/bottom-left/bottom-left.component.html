@@ -1,2 +1,4 @@
-<div id="bottom-left" [ngClass]="{'clickable': this.gamePlay.onOffState, 'unclickable': !this.gamePlay.onOffState}">
+<div id="bottom-left" [ngClass]="{'clickable': this.gamePlay.onOffState,
+'unclickable': !this.gamePlay.onOffState}"
+(click)="this.gamePlay.checkColorPress('blue')">
 </div>
