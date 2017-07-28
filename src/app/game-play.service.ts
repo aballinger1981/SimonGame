@@ -13,6 +13,7 @@ export class GamePlayService {
   public colorSelected$: Observable<string> = this.colorSelectedSource.asObservable();
   public numberOfCorrectTurns: string = '';
   public numberOfCorrectTurnsBeforeMistake: string;
+  public strictMode: boolean = false;
 
   constructor() { }
 
@@ -20,14 +21,15 @@ export class GamePlayService {
     return Math.floor(Math.random() * 4) + 1;
   }
 
-  public computerColorSelect(strictMode?: boolean): void {
+  public computerColorSelect(): void {
     this.colorButtonsClickable = false;
 
-    if (this.numberOfCorrectTurns !== '!!') {
+    if (this.numberOfCorrectTurns !== '!!' || this.computerColorPressNumber === 0) {
       this.computerColorPressNumber++;
       const randomNumber: number = this.getRandomNumber();
       const color: string = this.colorOptions[randomNumber - 1];
       this.computerColorPressMap.set(this.computerColorPressNumber, color);
+      console.log(this.computerColorPressMap);
     }
     if (this.numberOfCorrectTurns === '!!' || this.numberOfCorrectTurns === '') {
       this.setDisplayCounter();
@@ -57,6 +59,7 @@ export class GamePlayService {
       this.numberOfCorrectTurnsBeforeMistake = this.numberOfCorrectTurns;
       this.numberOfCorrectTurns = '!!';
       this.playerColorPressNumber = 0;
+      this.checkStrictMode();
       setTimeout(() => {
         this.computerColorSelect();
       }, 2000);
@@ -73,6 +76,12 @@ export class GamePlayService {
     }
   }
 
+  public checkStrictMode(): void {
+    if (!this.strictMode) { return; }
+    this.computerColorPressNumber = 0;
+    this.computerColorPressMap.clear();
+  }
+
   public setDisplayCounter(): void {
     let firstNumber: number = parseInt(this.numberOfCorrectTurns.substr(0, 1), 10);
     let secondNumber: number = parseInt(this.numberOfCorrectTurns.substr(1, 1), 10);
@@ -85,8 +94,10 @@ export class GamePlayService {
       this.numberOfCorrectTurns = firstNumber.toString() + secondNumber.toString();
     } else if (this.numberOfCorrectTurns === '') {
       this.numberOfCorrectTurns = '00';
-    } else if (this.numberOfCorrectTurns === '!!') {
+    } else if (this.numberOfCorrectTurns === '!!' && this.strictMode === false) {
       this.numberOfCorrectTurns = this.numberOfCorrectTurnsBeforeMistake;
+    } else if (this.numberOfCorrectTurns === '!!' && this.strictMode === true) {
+      this.numberOfCorrectTurns = '00';
     }
   }
 

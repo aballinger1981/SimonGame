@@ -51,7 +51,8 @@ export class ControlsComponent implements OnInit {
 
   public setStartButtonState(): void {
     if (this.onOffState === true) {
-      this.gamePlay.computerColorSelect(this.strictMode);
+      this.gamePlay.strictMode = this.strictMode;
+      this.gamePlay.computerColorSelect();
       this.clickableClassToggle = 'unclickable';
     }
   }
