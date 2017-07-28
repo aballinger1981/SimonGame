@@ -21,8 +21,9 @@ export class ControlsComponent implements OnInit {
 
   public setOnOffState(): void {
     if (this.onOffState === true) {
-      this.resetGame();
+      this.turnOffGame();
     } else {
+      this.gamePlay.numberOfCorrectTurns = '--';
       this.onOffState = true;
     }
     this.setClickabilityForStartAndStrictButtons();
@@ -57,7 +58,7 @@ export class ControlsComponent implements OnInit {
     }
   }
 
-  public resetGame(): void {
+  public turnOffGame(): void {
     this.onOffState = false;
     this.gamePlay.computerColorPressMap.clear();
     this.gamePlay.numberOfCorrectTurns = '';
