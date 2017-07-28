@@ -23,7 +23,7 @@ export class ControlsComponent implements OnInit {
     if (this.onOffState === true) {
       this.turnOffGame();
     } else {
-      this.gamePlay.numberOfCorrectTurns = '';
+      this.gamePlay.numberOfCorrectTurns = '00';
       this.onOffState = true;
     }
     this.setClickabilityForStartAndStrictButtons();
