@@ -22,11 +22,11 @@
 
 #top-left:focus {
   box-shadow: inset 3px 10px 100px #0da51a;
-  background: linear-gradient(to left, #0FB81D, #13ec25, #13ec25, #0FB81D);
+  background: linear-gradient(to left, #0FB81D, #2bee3b, #2bee3b, #0FB81D);
   outline: none;
 }
 
 #top-left:active {
   box-shadow: inset 3px 10px 100px #0da51a;
-  background: linear-gradient(to left, #0FB81D, #13ec25, #13ec25, #0FB81D);
+  background: linear-gradient(to left, #0FB81D, #2bee3b, #2bee3b, #0FB81D);
 }
