@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class GamePlayService {
-  public playerColorPressNumber: number = 0;
-  public computerColorPressNumber: number = 0;
+  public numberOfUserColorPresses: number = 0;
+  public numberOfComputerColorPresses: number = 0;
   public computerColorPressMap: Map<number, string> = new Map();
   public colorOptions: Array<string> = ['green', 'red', 'blue', 'yellow'];
   public colorButtonsClickable: boolean = false;
@@ -24,12 +24,11 @@ export class GamePlayService {
   public computerColorSelect(): void {
     this.colorButtonsClickable = false;
 
-    if (this.numberOfCorrectTurns !== '!!' || this.computerColorPressNumber === 0) {
-      this.computerColorPressNumber++;
+    if (this.numberOfCorrectTurns !== '!!' || this.numberOfComputerColorPresses === 0) {
+      this.numberOfComputerColorPresses++;
       const randomNumber: number = this.getRandomNumber();
       const color: string = this.colorOptions[randomNumber - 1];
-      this.computerColorPressMap.set(this.computerColorPressNumber, color);
-      console.log(this.computerColorPressMap);
+      this.computerColorPressMap.set(this.numberOfComputerColorPresses, color);
     }
     if (this.numberOfCorrectTurns === '!!' || this.numberOfCorrectTurns === '') {
       this.setDisplayCounter();
@@ -50,15 +49,15 @@ export class GamePlayService {
 
   public checkColorPress(playerColor: string, soundNumber: string): void {
     const soundClip: string = `simonSound${soundNumber}.mp3`;
-    this.playerColorPressNumber++;
+    this.numberOfUserColorPresses++;
     const audio = new Audio('../assets/sounds/' + soundClip);
     audio.play();
-    const computerColor = this.computerColorPressMap.get(this.playerColorPressNumber);
+    const computerColor = this.computerColorPressMap.get(this.numberOfUserColorPresses);
     if (computerColor !== playerColor) {
       this.colorButtonsClickable = false;
       this.numberOfCorrectTurnsBeforeMistake = this.numberOfCorrectTurns;
       this.numberOfCorrectTurns = '!!';
-      this.playerColorPressNumber = 0;
+      this.numberOfUserColorPresses = 0;
       this.checkStrictMode();
       setTimeout(() => {
         this.computerColorSelect();
@@ -66,9 +65,9 @@ export class GamePlayService {
       return;
     }
 
-    if (this.playerColorPressNumber === this.computerColorPressMap.size) {
+    if (this.numberOfUserColorPresses === this.computerColorPressMap.size) {
       this.colorButtonsClickable = false;
-      this.playerColorPressNumber = 0;
+      this.numberOfUserColorPresses = 0;
       if (this.numberOfCorrectTurns !== '!!') {
         this.setDisplayCounter();
       }
@@ -78,7 +77,7 @@ export class GamePlayService {
 
   public checkStrictMode(): void {
     if (!this.strictMode) { return; }
-    this.computerColorPressNumber = 0;
+    this.numberOfComputerColorPresses = 0;
     this.computerColorPressMap.clear();
   }
 

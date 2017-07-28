@@ -61,8 +61,8 @@ export class ControlsComponent implements OnInit {
     this.onOffState = false;
     this.gamePlay.computerColorPressMap.clear();
     this.gamePlay.numberOfCorrectTurns = '';
-    this.gamePlay.playerColorPressNumber = 0;
-    this.gamePlay.computerColorPressNumber = 0;
+    this.gamePlay.numberOfUserColorPresses = 0;
+    this.gamePlay.numberOfComputerColorPresses = 0;
     this.strictLightToggle = 'strict-light-foreground-black';
     this.gamePlay.colorButtonsClickable = false;
   }
