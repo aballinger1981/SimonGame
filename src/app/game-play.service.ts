@@ -30,10 +30,13 @@ export class GamePlayService {
       const color: string = this.colorOptions[randomNumber - 1];
       this.computerColorPressMap.set(this.numberOfComputerColorPresses, color);
     }
-    if (this.numberOfCorrectTurns === '!!' || this.numberOfCorrectTurns === '--') {
-      this.setDisplayCounter();
-    }
+    // if (this.numberOfCorrectTurns === '!!' || this.numberOfCorrectTurns === '--') {
+    //   this.setDisplayCounter();
+    // }
     this.playAllColorsInMap();
+    setTimeout(() => {
+      this.setDisplayCounter();
+    }, 1000);
   }
 
   public playAllColorsInMap(): void {
@@ -72,9 +75,9 @@ export class GamePlayService {
     if (this.numberOfUserColorPresses === this.computerColorPressMap.size) {
       this.colorButtonsClickable = false;
       this.numberOfUserColorPresses = 0;
-      if (this.numberOfCorrectTurns !== '!!') {
-        this.setDisplayCounter();
-      }
+      // if (this.numberOfCorrectTurns !== '!!') {
+      //   this.setDisplayCounter();
+      // }
       this.computerColorSelect();
     }
   }
@@ -95,12 +98,12 @@ export class GamePlayService {
       firstNumber++;
       secondNumber = 0;
       this.numberOfCorrectTurns = firstNumber.toString() + secondNumber.toString();
-    } else if (this.numberOfCorrectTurns === '--') {
-      this.numberOfCorrectTurns = '00';
+    } else if (this.numberOfCorrectTurns === '') {
+      this.numberOfCorrectTurns = '01';
     } else if (this.numberOfCorrectTurns === '!!' && this.strictMode === false) {
       this.numberOfCorrectTurns = this.numberOfCorrectTurnsBeforeMistake;
     } else if (this.numberOfCorrectTurns === '!!' && this.strictMode === true) {
-      this.numberOfCorrectTurns = '00';
+      this.numberOfCorrectTurns = '01';
     }
   }
 
