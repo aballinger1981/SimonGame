@@ -30,9 +30,6 @@ export class GamePlayService {
       const color: string = this.colorOptions[randomNumber - 1];
       this.computerColorPressMap.set(this.numberOfComputerColorPresses, color);
     }
-    // if (this.numberOfCorrectTurns === '!!' || this.numberOfCorrectTurns === '--') {
-    //   this.setDisplayCounter();
-    // }
     this.playAllColorsInMap();
     setTimeout(() => {
       this.setDisplayCounter();
@@ -57,7 +54,7 @@ export class GamePlayService {
   public checkColorPress(playerColor: string, soundNumber: string): void {
     const soundClip: string = `simonSound${soundNumber}.mp3`;
     this.numberOfUserColorPresses++;
-    const audio = new Audio('../assets/sounds/' + soundClip);
+    const audio = new Audio('assets/sounds/' + soundClip);
     audio.play();
     const computerColor = this.computerColorPressMap.get(this.numberOfUserColorPresses);
     if (computerColor !== playerColor) {
@@ -75,9 +72,6 @@ export class GamePlayService {
     if (this.numberOfUserColorPresses === this.computerColorPressMap.size) {
       this.colorButtonsClickable = false;
       this.numberOfUserColorPresses = 0;
-      // if (this.numberOfCorrectTurns !== '!!') {
-      //   this.setDisplayCounter();
-      // }
       this.computerColorSelect();
     }
   }

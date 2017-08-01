@@ -16,7 +16,7 @@ export class TopRightComponent implements OnInit {
       if (colorSelected === 'red') {
         this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', '0');
         this.renderer.invokeElementMethod(this.color.nativeElement, 'focus', []);
-        const audio = new Audio('../../assets/sounds/simonSound2.mp3');
+        const audio = new Audio('assets/sounds/simonSound2.mp3');
         audio.play();
         setTimeout(() => {
           this.renderer.invokeElementMethod(this.color.nativeElement, 'blur', []);
