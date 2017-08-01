@@ -8,6 +8,9 @@ export class GamePlayService {
   public numberOfComputerColorPresses: number = 0;
   public computerColorPressMap: Map<number, string> = new Map();
   public colorOptions: Array<string> = ['green', 'red', 'blue', 'yellow'];
+  public winningSoundArray: Array<string> = [
+    'green', 'yellow', 'red', 'blue', 'green', 'yellow', 'red', 'blue',
+    'green', 'yellow', 'red', 'blue', 'green', 'yellow', 'red', 'blue'];
   public colorButtonsClickable: boolean = false;
   public colorSelectedSource: Subject<string> = new Subject<string>();
   public colorSelected$: Observable<string> = this.colorSelectedSource.asObservable();
@@ -23,7 +26,6 @@ export class GamePlayService {
 
   public computerColorSelect(): void {
     this.colorButtonsClickable = false;
-
     if (this.numberOfCorrectTurns !== '!!' || this.numberOfComputerColorPresses === 0) {
       this.numberOfComputerColorPresses++;
       const randomNumber: number = this.getRandomNumber();
@@ -51,11 +53,11 @@ export class GamePlayService {
     }, 1000 * this.computerColorPressMap.size + 500);
   }
 
-  public checkColorPress(playerColor: string, soundNumber: string): void {
+  public checkUserColorPress(playerColor: string, soundNumber: string): void {
     const soundClip: string = `simonSound${soundNumber}.mp3`;
-    this.numberOfUserColorPresses++;
     const audio = new Audio('assets/sounds/' + soundClip);
     audio.play();
+    this.numberOfUserColorPresses++;
     const computerColor = this.computerColorPressMap.get(this.numberOfUserColorPresses);
     if (computerColor !== playerColor) {
       this.colorButtonsClickable = false;
@@ -68,12 +70,32 @@ export class GamePlayService {
       }, 2000);
       return;
     }
-
     if (this.numberOfUserColorPresses === this.computerColorPressMap.size) {
       this.colorButtonsClickable = false;
       this.numberOfUserColorPresses = 0;
+      if (this.computerColorPressMap.size === 20) {
+        this.playWinningSounds();
+        return;
+      }
       this.computerColorSelect();
     }
+  }
+
+  public playWinningSounds(): void {
+    setTimeout(() => {
+      for (let i = 0; i < this.winningSoundArray.length; i++) {
+        setTimeout(() => {
+          this.colorSelectedSource.next(this.winningSoundArray[i]);
+        }, 250 * (i + 1));
+      }
+    }, 1000);
+    this.numberOfUserColorPresses = 0;
+    this.numberOfComputerColorPresses = 0;
+    this.computerColorPressMap.clear();
+    setTimeout(() => {
+      this.numberOfCorrectTurns = '00';
+      this.computerColorSelect();
+    }, 7000);
   }
 
   public checkStrictMode(): void {
