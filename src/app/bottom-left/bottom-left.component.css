@@ -6,6 +6,7 @@
   border-top: 15px solid black;
   border-bottom-left-radius: 100%;
   background-color: #05B5FF;
+  user-select: none;
 }
 
 .clickable {
