@@ -54,11 +54,13 @@ export class GamePlayService {
   }
 
   public checkUserColorPress(playerColor: string, soundNumber: string): void {
+    const body: HTMLBodyElement = document.getElementsByTagName('body')[0];
     const soundClip: string = `simonSound${soundNumber}.mp3`;
     const audio = new Audio('assets/sounds/' + soundClip);
     audio.play();
     this.numberOfUserColorPresses++;
     const computerColor = this.computerColorPressMap.get(this.numberOfUserColorPresses);
+    body.focus();
     if (computerColor !== playerColor) {
       this.colorButtonsClickable = false;
       this.numberOfCorrectTurnsBeforeMistake = this.numberOfCorrectTurns;
