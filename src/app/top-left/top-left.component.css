@@ -25,9 +25,11 @@
   box-shadow: inset 3px 10px 100px #0da51a;
   background: linear-gradient(to left, #0FB81D, #2bee3b, #2bee3b, #0FB81D);
   outline: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 #top-left:active {
   box-shadow: inset 3px 10px 100px #0da51a;
   background: linear-gradient(to left, #0FB81D, #2bee3b, #2bee3b, #0FB81D);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
