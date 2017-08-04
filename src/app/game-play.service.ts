@@ -8,9 +8,6 @@ export class GamePlayService {
   public numberOfComputerColorPresses: number = 0;
   public computerColorPressMap: Map<number, string> = new Map();
   public colorOptions: Array<string> = ['green', 'red', 'blue', 'yellow'];
-  public winningSoundArray: Array<string> = [
-    'green', 'yellow', 'red', 'blue', 'green', 'yellow', 'red', 'blue',
-    'green', 'yellow', 'red', 'blue', 'green', 'yellow', 'red', 'blue'];
   public colorButtonsClickable: boolean = false;
   public colorSelectedSource: Subject<string> = new Subject<string>();
   public colorSelected$: Observable<string> = this.colorSelectedSource.asObservable();
@@ -84,10 +81,13 @@ export class GamePlayService {
   }
 
   public playWinningSounds(): void {
+    const winningSoundArray: Array<string> = [
+      'green', 'yellow', 'red', 'blue', 'green', 'yellow', 'red', 'blue',
+      'green', 'yellow', 'red', 'blue', 'green', 'yellow', 'red', 'blue'];
     setTimeout(() => {
-      for (let i = 0; i < this.winningSoundArray.length; i++) {
+      for (let i = 0; i < winningSoundArray.length; i++) {
         setTimeout(() => {
-          this.colorSelectedSource.next(this.winningSoundArray[i]);
+          this.colorSelectedSource.next(winningSoundArray[i]);
         }, 250 * (i + 1));
       }
     }, 1000);
