@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { GamePlayService } from '../game-play.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-top-left',
@@ -8,12 +9,16 @@ import { GamePlayService } from '../game-play.service';
 })
 export class TopLeftComponent implements OnInit {
   @ViewChild('color') color: ElementRef;
-  public colorButtonsClickable: boolean = false;
+  public colorSelectedSubscription: Subscription;
 
   constructor(
     public gamePlay: GamePlayService,
     public renderer: Renderer) {
-    gamePlay.colorSelected$.subscribe(colorSelected => {
+  }
+
+  ngOnInit() {
+    this.unsubscribeIfGameIsOff();
+    this.colorSelectedSubscription = this.gamePlay.colorSelected$.subscribe(colorSelected => {
       if (colorSelected === 'green') {
         this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', '0');
         this.renderer.invokeElementMethod(this.color.nativeElement, 'focus', []);
@@ -27,7 +32,10 @@ export class TopLeftComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  public unsubscribeIfGameIsOff(): void {
+    if (this.gamePlay.gameIsOn === false) {
+      this.colorSelectedSubscription.unsubscribe();
+    }
   }
 
 }

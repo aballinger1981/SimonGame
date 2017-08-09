@@ -23,10 +23,26 @@ export class ControlsComponent implements OnInit {
     if (this.onOffState === true) {
       this.turnOffGame();
     } else {
-      this.gamePlay.numberOfCorrectTurns = '00';
-      this.onOffState = true;
+      this.turnOnGame();
     }
     this.setClickabilityForStartAndStrictButtons();
+  }
+
+  public turnOnGame(): void {
+    this.gamePlay.numberOfCorrectTurns = '00';
+    this.onOffState = true;
+    this.gamePlay.gameIsOn = true;
+  }
+
+  public turnOffGame(): void {
+    this.onOffState = false;
+    this.gamePlay.computerColorPressMap.clear();
+    this.gamePlay.numberOfCorrectTurns = '';
+    this.gamePlay.numberOfUserColorPresses = 0;
+    this.gamePlay.numberOfComputerColorPresses = 0;
+    this.gamePlay.gameIsOn = false;
+    this.strictLightToggle = 'strict-light-foreground-black';
+    this.gamePlay.colorButtonsClickable = false;
   }
 
   public setClickabilityForStartAndStrictButtons(): void {
@@ -38,7 +54,11 @@ export class ControlsComponent implements OnInit {
   }
 
   public setStrictMode(): void {
-    this.strictMode === true ? this.strictMode = false : this.strictMode = true;
+    if (this.strictMode === true) {
+      this.strictMode = false;
+    } else {
+      this.strictMode = true;
+    }
     this.setStrictLight();
   }
 
@@ -56,16 +76,6 @@ export class ControlsComponent implements OnInit {
       this.gamePlay.computerColorSelect();
       this.clickableClassToggle = 'unclickable';
     }
-  }
-
-  public turnOffGame(): void {
-    this.onOffState = false;
-    this.gamePlay.computerColorPressMap.clear();
-    this.gamePlay.numberOfCorrectTurns = '';
-    this.gamePlay.numberOfUserColorPresses = 0;
-    this.gamePlay.numberOfComputerColorPresses = 0;
-    this.strictLightToggle = 'strict-light-foreground-black';
-    this.gamePlay.colorButtonsClickable = false;
   }
 
 }
