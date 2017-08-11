@@ -17,7 +17,6 @@ export class TopLeftComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.unsubscribeIfGameIsOff();
     this.colorSelectedSubscription = this.gamePlay.colorSelected$.subscribe(colorSelected => {
       if (colorSelected === 'green') {
         this.renderer.setElementAttribute(this.color.nativeElement, 'tabindex', '0');
@@ -30,12 +29,6 @@ export class TopLeftComponent implements OnInit {
         }, 500);
       }
     });
-  }
-
-  public unsubscribeIfGameIsOff(): void {
-    if (this.gamePlay.gameIsOn === false) {
-      this.colorSelectedSubscription.unsubscribe();
-    }
   }
 
 }

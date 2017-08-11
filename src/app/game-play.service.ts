@@ -26,7 +26,7 @@ export class GamePlayService {
     if (this.numberOfCorrectTurns !== '!!' || this.numberOfComputerColorPresses === 0) {
       this.addComputerColorPress();
     }
-    this.playAllColorsInMap();
+    this.playAllColorsInMap()
     setTimeout(() => {
       this.setDisplayCounter();
     }, 1000);
@@ -41,19 +41,46 @@ export class GamePlayService {
   }
 
   public playAllColorsInMap(): void {
-    this.computerColorPressMap.forEach((pressedColor, key) => {
-      this.setDelayedColorPress(pressedColor, key);
+    let gameWasTurnedOff: boolean = false;
+    let mapKey: number = 1;
+    let mapSize: number = this.computerColorPressMap.size;
+    const mapLoop: Promise<boolean> = new Promise((resolve, reject) => {
+      function loop(gameIsOn, computerColorPressMap, colorSelectedSource) {
+        setTimeout(() => {
+          if (!this.gameIsOn) {
+            gameWasTurnedOff = true;
+            resolve(true);
+          } else {
+            const pressedColor: string = computerColorPressMap.get(mapKey);
+            colorSelectedSource.next(pressedColor);
+            console.log(gameIsOn);
+          }
+          if (--mapSize) {
+            mapKey++;
+            loop(gameIsOn, computerColorPressMap, colorSelectedSource);
+          } else {
+            resolve(true);
+          }
+        }, 1000);
+      }
+    loop(this.gameIsOn, this.computerColorPressMap, this.colorSelectedSource)
     });
-    this.makeColorButtonsClickableAfterDelay();
+    mapLoop.then(() => {
+      if (!gameWasTurnedOff) { this.colorButtonsClickable = true; }
+    });
+
+    // this.computerColorPressMap.forEach((pressedColor, key) => {
+    //   this.setDelayedColorPress(pressedColor, key);
+    // });
   }
 
-  public setDelayedColorPress(pressedColor: string, key: number): void {
-    setTimeout(() => {
-      if (this.gameIsOn) {
-        this.colorSelectedSource.next(pressedColor);
-      }
-    }, 1000 * key);
-  }
+  // public setDelayedColorPress(pressedColor: string, key: number): void {
+  //   setTimeout(() => {
+  //     if (this.gameIsOn) {
+  //       this.colorSelectedSource.next(pressedColor);
+  //     }
+  //   }, 1000 * key);
+  // }
 
   public makeColorButtonsClickableAfterDelay(): void {
     setTimeout(() => {
