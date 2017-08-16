@@ -43,6 +43,7 @@ export class ControlsComponent implements OnInit {
     this.gamePlay.gameIsOn = false;
     this.strictLightToggle = 'strict-light-foreground-black';
     this.gamePlay.colorButtonsClickable = false;
+    this.gamePlay.gameTurnedOffSource.next(true);
   }
 
   public setClickabilityForStartAndStrictButtons(): void {

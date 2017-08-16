@@ -10,6 +10,8 @@ export class GamePlayService {
   public colorButtonsClickable: boolean = false;
   public colorSelectedSource: Subject<string> = new Subject<string>();
   public colorSelected$: Observable<string> = this.colorSelectedSource.asObservable();
+  public gameTurnedOffSource: Subject<boolean> = new Subject<boolean>();
+  public gameTurnedOff$: Observable<boolean> = this.gameTurnedOffSource.asObservable();
   public numberOfCorrectTurns: string = '';
   public numberOfCorrectTurnsBeforeMistake: string;
   public strictMode: boolean = false;
@@ -44,50 +46,25 @@ export class GamePlayService {
     let gameWasTurnedOff: boolean = false;
     let mapKey: number = 1;
     let mapSize: number = this.computerColorPressMap.size;
+    this.gameTurnedOff$.subscribe(() => { gameWasTurnedOff = true; });
     const mapLoop: Promise<boolean> = new Promise((resolve, reject) => {
-      function loop(gameIsOn, computerColorPressMap, colorSelectedSource) {
+      function loop(computerColorPressMap: Map<number, string>, colorSelectedSource: Subject<string>) {
         setTimeout(() => {
-          if (!this.gameIsOn) {
-            gameWasTurnedOff = true;
-            resolve(true);
-          } else {
-            const pressedColor: string = computerColorPressMap.get(mapKey);
-            colorSelectedSource.next(pressedColor);
-            console.log(gameIsOn);
-          }
-          if (--mapSize) {
+          const pressedColor: string = computerColorPressMap.get(mapKey);
+          colorSelectedSource.next(pressedColor);
+          if (--mapSize && !gameWasTurnedOff) {
             mapKey++;
-            loop(gameIsOn, computerColorPressMap, colorSelectedSource);
+            loop(computerColorPressMap, colorSelectedSource);
           } else {
             resolve(true);
           }
         }, 1000);
       }
-    loop(this.gameIsOn, this.computerColorPressMap, this.colorSelectedSource)
+      loop(this.computerColorPressMap, this.colorSelectedSource);
     });
     mapLoop.then(() => {
       if (!gameWasTurnedOff) { this.colorButtonsClickable = true; }
     });
-
-    // this.computerColorPressMap.forEach((pressedColor, key) => {
-    //   this.setDelayedColorPress(pressedColor, key);
-    // });
-  }
-
-  // public setDelayedColorPress(pressedColor: string, key: number): void {
-  //   setTimeout(() => {
-  //     if (this.gameIsOn) {
-  //       this.colorSelectedSource.next(pressedColor);
-  //     }
-  //   }, 1000 * key);
-  // }
-
-  public makeColorButtonsClickableAfterDelay(): void {
-    setTimeout(() => {
-      if (this.gameIsOn) {
-        this.colorButtonsClickable = true;
-      }
-    }, 1000 * this.computerColorPressMap.size + 500);
   }
 
   public setDisplayCounter(): void {
